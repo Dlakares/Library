@@ -1,7 +1,16 @@
 package ru.rustam.project.model;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.Length;
+
 public class Person {
+    @NotEmpty(message = "Name should not be empty")
+    @Size(min = 2, max = 30, message = "Name should be between 2 and 30 ch")
     private String name;
+    @Min(value = 1900, message = "Year of birth should not be over 1900 year")
+    @NotEmpty(message = "name cant be empty")
     private int yearOfBirth;
     private int id;
 

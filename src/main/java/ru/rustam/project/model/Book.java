@@ -1,8 +1,18 @@
 package ru.rustam.project.model;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+
 public class Book {
+    @Size(min = 2, max = 30, message = "Title must be between 2 and 30 ch")
+    @NotEmpty(message = "Title cant be empty")
     private String title;
+    @Size(min = 2, max = 30, message = "Author must be between 2 and 30 ch")
+    @NotEmpty(message = "Author cant be empty")
     private String author;
+    @Min(value = 1500, message = "Year should not be over 1500 year")
+    @NotEmpty(message = "year cant be empty")
     private int year;
     private int id;
     private int id_owner;

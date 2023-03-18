@@ -1,8 +1,10 @@
 package ru.rustam.project.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.rustam.project.dao.PersonDAO;
 import ru.rustam.project.model.Person;
@@ -36,7 +38,10 @@ public class PersonController {
     }
 
     @PostMapping
-    public String PostCreatePerson(@ModelAttribute("person") Person person){
+    public String PostCreatePerson(@ModelAttribute("person") @Valid Person person,
+                                   BindingResult bindingResult){
+        if (bindingResult.hasErrors())
+            return "people/new";
         personDAO.createPerson(person);
         return "redirect:/people";
     }
@@ -48,7 +53,9 @@ public class PersonController {
     }
 
     @PatchMapping("/{id}")
-    public String PatchEditPerson(@ModelAttribute("person") Person person, @PathVariable("id") int id){
+    public String PatchEditPerson(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult , @PathVariable("id") int id){
+        if (bindingResult.hasErrors())
+            return "people/edit";
         personDAO.updatePerson(id, person);
         return "redirect:/people";
     }
