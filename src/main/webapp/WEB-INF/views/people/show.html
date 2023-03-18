@@ -7,5 +7,9 @@
 <body>
 <p th:text="${person.getName()}">name</p>
 <p th:text="${person.getYearOfBirth()}">year</p>
+
+<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+    <input type="submit" value="DELETE">
+</form>
 </body>
 </html>

@@ -35,5 +35,10 @@ public class PersonDAO {
         Person personToBeUpdate = show(id);
         personToBeUpdate.setName(updatedPerson.getName());
         personToBeUpdate.setYearOfBirth(updatedPerson.getYearOfBirth());
+        System.out.println("update");
+    }
+
+    public void delete(int id){
+        people.removeIf(person -> person.getId() == id);
     }
 }
